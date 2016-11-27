@@ -1,4 +1,4 @@
-package main.java.com.edgar.sentiment;
+package com.edgar.sentiment;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -10,9 +10,9 @@ public final class PrintFilterStream {
 
     private TwitterStream twitterStream;
 
-    public PrintFilterStream() throws TwitterException, IOException {
+    public PrintFilterStream() throws Exception {
 
-        SaveTwit saveTwit = new SaveTwit();
+        final SaveTwit saveTwit = new SaveTwit();
         twitterStream = new TwitterStreamFactory().getInstance();
 
         RawStreamListener listener = new RawStreamListener() {
@@ -25,6 +25,8 @@ public final class PrintFilterStream {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                System.out.println(jsonObject.getAsJsonObject("user").get("screen_name").getAsString());
+                System.out.println(jsonObject.get("text").getAsString());
             }
 
             @Override
