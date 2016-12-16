@@ -1,31 +1,16 @@
 package com.edgar.sentiment;
 
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.hbase.HBaseConfiguration;
-import org.apache.hadoop.hbase.client.Scan;
-import org.apache.hadoop.hbase.mapreduce.TableMapReduceUtil;
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Job;
-
 import java.io.IOException;
 
-/**
- * Hello world!
- *
- */
 public class App {
 
 
     public static void main( String[] args ) throws IOException {
+
+        //train();
+        //listenAll();
         try {
-            PrintFilterStream printFilterStream = new PrintFilterStream();
-            try {
-                Thread.sleep(100000000);                 //10s.
-                printFilterStream.getTwitterStream().cleanUp();
-            } catch(InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
+            Twit2Vector twit2Vector = new Twit2Vector();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,5 +47,48 @@ public class App {
 //            throw new IOException("error with job!");
 //        }
 
+    }
+
+
+    /**
+     * Save twit in Twit-emoji-eg to be train
+     * @throws IOException
+     */
+    public static void train() throws IOException {
+        try {
+            TwitterStream printFilterStream = new TwitterStream();
+            printFilterStream.train();
+            try {
+                Thread.sleep(60 *   // minutes to sleep
+                                    60 *   // seconds to a minute
+                                    1000); // milliseconds to a second
+                printFilterStream.getTwitterStream().cleanUp();
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Save twit in Twit-emoji-eg to be train
+     * @throws IOException
+     */
+    public static void listenAll() throws IOException {
+        try {
+            TwitterStream printFilterStream = new TwitterStream();
+            printFilterStream.listenAll();
+            try {
+                Thread.sleep(10 *   // minutes to sleep
+                                    60 *   // seconds to a minute
+                                    1000); // milliseconds to a second
+                printFilterStream.getTwitterStream().cleanUp();
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

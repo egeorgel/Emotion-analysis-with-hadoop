@@ -16,42 +16,32 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>jdk.tools</groupId>
-        <artifactId>jdk.tools</artifactId>
-        <version>1.6</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-hdfs</artifactId>
-        <version>2.0.0-cdh4.0.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-auth</artifactId>
-        <version>2.0.0-cdh4.0.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-common</artifactId>
-        <version>2.0.0-cdh4.0.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.hadoop</groupId>
-        <artifactId>hadoop-core</artifactId>
-        <version>2.0.0-mr1-cdh4.0.1</version>
-      </dependency>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit-dep</artifactId>
-        <version>4.8.2</version>
-      </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>20.0</version>
+        </dependency>
+
     </dependencies>
   </dependencyManagement>
 
 
 
   <dependencies>
+      <dependency>
+          <groupId>com.google.guava</groupId>
+          <artifactId>guava</artifactId>
+          <version>20.0</version>
+      </dependency>
+      <!--&lt;!&ndash; LANGUAGE DETECTION &ndash;&gt;-->
+      <dependency>
+          <groupId>com.optimaize.languagedetector</groupId>
+          <artifactId>language-detector</artifactId>
+          <version>0.6</version>
+      </dependency>
+
+      <!-- EMOJI API-->
       <dependency>
           <groupId>com.vdurmont</groupId>
           <artifactId>emoji-java</artifactId>
@@ -122,6 +112,37 @@
           <scope>test</scope>
       </dependency>
 
+      <!-- DeepLearning4J -->
+      <!-- https://mvnrepository.com/artifact/org.nd4j/nd4j-native -->
+      <dependency>
+          <groupId>org.nd4j</groupId>
+          <artifactId>nd4j-native</artifactId>
+          <version>0.7.1</version>
+      </dependency>
+      <dependency>
+          <groupId>org.deeplearning4j</groupId>
+          <artifactId>deeplearning4j-core</artifactId>
+          <version>0.7.1</version>
+      </dependency>
+      <dependency>
+          <groupId>org.deeplearning4j</groupId>
+          <artifactId>deeplearning4j-nlp</artifactId>
+          <version>0.7.1</version>
+      </dependency>
+
+      <!-- Hadoop test artifact for running mini clusters -->
+      <dependency>
+          <groupId>org.apache.hadoop</groupId>
+          <artifactId>hadoop-minicluster</artifactId>
+          <version>2.0.0-cdh4.0.0</version>
+          <scope>test</scope>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.hbase</groupId>
+          <artifactId>hbase-server</artifactId>
+          <version>1.1.2</version>
+      </dependency>
+
     <!-- TEST -->
     <!-- Unit test artifacts -->
     <dependency>
@@ -137,19 +158,33 @@
       <classifier>hadoop2</classifier>
       <scope>test</scope>
     </dependency>
-    <!-- Hadoop test artifact for running mini clusters -->
-    <dependency>
-      <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-minicluster</artifactId>
-      <version>2.0.0-cdh4.0.0</version>
-      <scope>test</scope>
-    </dependency>
+
       <dependency>
-          <groupId>org.apache.hbase</groupId>
-          <artifactId>hbase-server</artifactId>
-          <version>1.1.2</version>
+          <groupId>edu.berkeley.compbio</groupId>
+          <artifactId>jlibsvm</artifactId>
+          <version>0.911</version>
       </dependency>
+
   </dependencies>
+
+
+    <repositories>
+        <repository>
+            <id>dev.davidsoergel.com releases</id>
+            <url>http://dev.davidsoergel.com/nexus/content/repositories/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>dev.davidsoergel.com snapshots</id>
+            <url>http://dev.davidsoergel.com/nexus/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
 
   <build>
 
